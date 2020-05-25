@@ -1,9 +1,12 @@
 package com.v1.CentralDeErros.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,6 +19,9 @@ public class UserApplication {
 	private String userName;
 
 	private String password;
+
+	@OneToMany(mappedBy = "id.userApplication")
+	private List<Permission> permissions;
 
 	public String getUsername() {
 		return userName;
@@ -31,6 +37,14 @@ public class UserApplication {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
 	}
 
 }

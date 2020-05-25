@@ -1,21 +1,32 @@
 package com.v1.CentralDeErros.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.v1.CentralDeErros.enums.ApplicationStatus;
-import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.v1.CentralDeErros.enums.ApplicationStatus;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+
+@RequiredArgsConstructor
 @NoArgsConstructor
+@Getter
 @Entity
+@Table(name = "application_instance")
 public class ApplicationInstance {
 
     @Id
@@ -24,28 +35,20 @@ public class ApplicationInstance {
     private Integer id;
 
     @NonNull
-    private String name;
+    private String applicationName;
 
     @NonNull
     private Date instantiationDate;
 
-    private final ApplicationStatus status = ApplicationStatus.ACTIVE;
+    private ApplicationStatus status = ApplicationStatus.ACTIVE;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "applicationInstance",
             cascade = CascadeType.PERSIST
     )
-    @JsonIgnore
-    private final List<Error> error = new ArrayList<>();
-
-    @NonNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "server_id")
-    @JsonIgnore
-    private Server server;
-
-    public ApplicationInstance(String applicationName, Date instantiationDate, Server server) {
-        this.name = applicationName;
-        this.instantiationDate = instantiationDate;
-        this.server = server;
-    }
+    private List<Error> error = new ArrayList<>();
+    	
+	@OneToMany(mappedBy = "id.applicationInstance")
+	private List<Permission> permissions;
+	
 }
