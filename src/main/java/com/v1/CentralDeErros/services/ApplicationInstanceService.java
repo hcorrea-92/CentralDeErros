@@ -1,24 +1,22 @@
 package com.v1.CentralDeErros.services;
 
-import com.v1.CentralDeErros.models.Server;
-import com.v1.CentralDeErros.repositories.ServerRepository;
-import com.v1.CentralDeErros.Util.DateUtility;
-import com.v1.CentralDeErros.exceptions.NotFoundException;
-import com.v1.CentralDeErros.exceptions.WrongInputDataException;
-import com.v1.CentralDeErros.models.ApplicationInstance;
-import com.v1.CentralDeErros.models.DTOs.ApplicationInstanceDTO;
-import com.v1.CentralDeErros.models.Error;
-import com.v1.CentralDeErros.repositories.ApplicationInstanceRepository;
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.v1.CentralDeErros.Util.DateUtility;
+import com.v1.CentralDeErros.exceptions.NotFoundException;
+import com.v1.CentralDeErros.exceptions.WrongInputDataException;
+import com.v1.CentralDeErros.models.ApplicationInstance;
+import com.v1.CentralDeErros.models.Error;
+import com.v1.CentralDeErros.models.DTOs.ApplicationInstanceDTO;
+import com.v1.CentralDeErros.repositories.ApplicationInstanceRepository;
 
 @Service
 @Transactional
